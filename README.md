@@ -29,8 +29,8 @@ options:
 -h, --help       show brief help
 -f FRAMENUM      specify a frame number manually (defaults to a random frame)
 -t SECONDS       specify a time index in seconds
--bg RGB          specify background red green blue separated by comma (default '0,0,0')
--fg RGB          specify foreground red green blue separated by comma (default '0,0,0')
+-bg RGB          specify background red green blue separated by comma (default '0,0,0', black)
+-fg RGB          specify foreground red green blue separated by comma (default '255,255,255', white)
 -o OPACITY       specify a opacity of the title overlay as a decimal number between 0.0 and 1.0 (default 0.8)
 ```
 

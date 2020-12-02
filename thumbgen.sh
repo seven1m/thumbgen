@@ -69,7 +69,7 @@ fi
 
 # Grab a random frame from the video
 if [[ -z "$FRAME" && -z "$TIME" ]]; then
-  TOTAL_FRAMES=$(ffmpeg -i "$file" -vcodec copy -acodec copy -f null /dev/null 2>&1 | egrep -o "frame=[0-9]+" | cut -d '=' -f 2)
+  TOTAL_FRAMES=$(ffmpeg -i "$file" -vcodec copy -acodec copy -f null /dev/null 2>&1 | egrep -o "frame=[0-9]+" | head -n1 | cut -d '=' -f 2)
   FRAME=$((RANDOM % TOTAL_FRAMES))
 fi
 if [[ -z "$TIME" ]]; then

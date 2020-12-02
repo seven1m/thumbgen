@@ -14,7 +14,7 @@ while test $# -gt 0; do
       echo "-f FRAMENUM      specify a frame number manually (defaults to a random frame)"
       echo "-t SECONDS       specify a time index in seconds"
       echo "-bg RGB          specify background red green blue separated by comma (default '0,0,0')"
-      echo "-fg RGB          specify foreground red green blue separated by comma (default '0,0,0')"
+      echo "-fg RGB          specify foreground red green blue separated by comma (default '255,255,255')"
       echo "-o OPACITY       specify a opacity of the title overlay as a decimal number between 0.0 and 1.0 (default 0.8)"
       exit 0
       ;;
@@ -64,7 +64,7 @@ if [[ -z "$BG_RGB" ]]; then
 fi
 
 if [[ -z "$FG_RGB" ]]; then
-  FG_RGB="0,0,0"
+  FG_RGB="255,255,255"
 fi
 
 # Grab a random frame from the video

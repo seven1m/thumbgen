@@ -75,11 +75,13 @@ fi
 if [[ -z "$TIME" ]]; then
   FPS=$(ffprobe -v error -select_streams v -of default=noprint_wrappers=1:nokey=1 -show_entries stream=avg_frame_rate "$file" | cut -d'/' -f 1)
   TIME=$((FRAME/FPS))
+  FILENAME="$FRAME.png"
 else
   FRAME="$TIME" # FIXME: just set it to something for now
+  FILENAME="$TIME.png"
 fi
-ffmpeg -ss $TIME -i "$file" -frames:v 1 "$FRAME".png > /dev/null 2>&1
-FILENAME="$FRAME.png"
+rm -f "$FILENAME"
+ffmpeg -ss $TIME -i "$file" -frames:v 1 "$FILENAME" > /dev/null 2>&1
 
 VIDEO_WIDTH=$(ffprobe -v error -select_streams v -of default=noprint_wrappers=1 -show_entries stream "$file" | grep "^width=" | cut -d'=' -f2)
 VIDEO_HEIGHT=$(ffprobe -v error -select_streams v -of default=noprint_wrappers=1 -show_entries stream "$file" | grep "^height=" | cut -d'=' -f2)
@@ -93,8 +95,8 @@ FONT="helvetica-bold"
 LINE_SPACING=25
 FONTSIZE=180
 # And finally, add the title text.
-out="thumbnail${FRAME}.png"
+out="thumbnail${FILENAME}"
 convert temp.png \( -gravity Center -pointsize $FONTSIZE -size "$((VIDEO_WIDTH - 50))"x -background transparent -fill "rgb($FG_RGB)" -font $FONT -interline-spacing $LINE_SPACING caption:"$thumbstr" \) -gravity Center -geometry +0+0 -composite $out
 rm temp.png
-rm "$FRAME".png
+rm "$FILENAME"
 echo "Wrote $out"
